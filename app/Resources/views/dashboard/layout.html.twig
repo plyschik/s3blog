@@ -33,15 +33,27 @@
             </div>
         </nav>
         <div class="container">
+            {% for type, messages in app.flashes() %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ type }}">
+                        {{ message|trans }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             <div class="row">
                 <div class="col-md-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">{{ 'dashboard.side.posts.header'|trans }}</h3>
                         </div>
-                        <div class="panel-body">
-                            ...
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ path('dashboard.post.list') }}">{{ 'dashboard.post.list'|trans }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ path('dashboard.post.create') }}">{{ 'dashboard.post.create'|trans }}</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
