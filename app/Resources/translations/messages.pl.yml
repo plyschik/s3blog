@@ -1,0 +1,17 @@
+blog.navbar.brand: s3blog
+blog.navbar.signin: Zaloguj się
+blog.navbar.signup: Zarejestruj się
+blog.navbar.signout: Wyloguj się
+
+blog.side.categories.header: Kategorie
+blog.side.posts.header: Popularne posty
+blog.side.tags.header: Tagi
+blog.side.archive.header: Archiwum
+
+dashboard.navbar.brand: s3blog - panel administracyjny
+dashboard.navbar.blog: Powrót do bloga
+dashboard.navbar.signout: Wyloguj się
+
+dashboard.side.posts.header: Posty
+dashboard.side.categories.header: Kategorie
+dashboard.side.tags.header: Tagi
