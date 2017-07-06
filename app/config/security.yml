@@ -20,5 +20,4 @@ security:
                 path: /signout
                 target: blog.index
     access_control:
-        - { path: ^/signin$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/dashboard$, roles: ROLE_ADMINISTRATOR }
