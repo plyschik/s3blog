@@ -15,3 +15,13 @@ dashboard.navbar.signout: Wyloguj się
 dashboard.side.posts.header: Posty
 dashboard.side.categories.header: Kategorie
 dashboard.side.tags.header: Tagi
+
+blog.signup.form.header: Formularz rejestracyjny
+blog.signup.form.email: Adres email:
+blog.signup.form.firstName: Imię:
+blog.signup.form.lastName: Nazwisko:
+blog.signup.form.passwordFirst: Hasło:
+blog.signup.form.passwordSecond: Powtórz hasło:
+blog.signup.form.submit: Zarejestruj się
+
+blog.flashMessages.signup.success: Twoje konto zostało poprawnie zarejestrowane!
