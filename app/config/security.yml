@@ -4,7 +4,7 @@ security:
     providers:
         database:
             entity:
-                class: AppBundle\User
+                class: AppBundle:User
                 property: email
     firewalls:
         dev:
@@ -13,10 +13,12 @@ security:
         main:
             anonymous: ~
             form_login:
-                login_path: blog.signin
                 check_path: blog.signin
+                login_path: blog.signin
+                default_target_path: blog.index
             logout:
                 path: /signout
                 target: blog.index
     access_control:
-        - { path: ^/dashboard, roles: ROLE_ADMINISTRATOR }
+        - { path: ^/signin$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/dashboard$, roles: ROLE_ADMINISTRATOR }

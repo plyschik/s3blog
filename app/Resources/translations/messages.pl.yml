@@ -16,6 +16,11 @@ dashboard.side.posts.header: Posty
 dashboard.side.categories.header: Kategorie
 dashboard.side.tags.header: Tagi
 
+blog.signin.form.header: Formularz logowania
+blog.signin.form.email: Adres email:
+blog.signin.form.password: Hasło:
+blog.signin.form.submit: Zaloguj się
+
 blog.signup.form.header: Formularz rejestracyjny
 blog.signup.form.email: Adres email:
 blog.signup.form.firstName: Imię:

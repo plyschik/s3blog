@@ -13,14 +13,31 @@ class SecurityController extends Controller
 {
     /**
      * @Route("/signin", name="blog.signin")
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function signInAction()
+    public function signInAction(Request $request)
     {
+        $authenticationUtils = $this->get('security.authentication_utils');
 
+        $lastError      = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername   = $authenticationUtils->getLastUsername();
+
+        return $this->render('blog/security/signin.html.twig', [
+            'last_username' => $lastUsername,
+            'error'         => $lastError
+        ]);
     }
 
     /**
      * @Route("/signup", name="blog.signup")
+     *
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function signUpAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {

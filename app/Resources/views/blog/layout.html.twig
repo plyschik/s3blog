@@ -26,8 +26,12 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ path('blog.signin') }}">{{ 'blog.navbar.signin'|trans }}</a></li>
-                        <li><a href="{{ path('blog.signup') }}">{{ 'blog.navbar.signup'|trans }}</a></li>
+                        {% if not app.user %}
+                            <li><a href="{{ path('blog.signin') }}">{{ 'blog.navbar.signin'|trans }}</a></li>
+                            <li><a href="{{ path('blog.signup') }}">{{ 'blog.navbar.signup'|trans }}</a></li>
+                        {% else %}
+                            <li><a href="signout">{{ 'blog.navbar.signout'|trans }}</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
