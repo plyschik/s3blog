@@ -1,3 +1,5 @@
 blog:
     resource: '@AppBundle/Controller'
     type: annotation
+logout:
+    path: /signout
