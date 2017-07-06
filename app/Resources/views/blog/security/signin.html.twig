@@ -1,0 +1,20 @@
+{% extends ':blog:layout.html.twig' %}
+
+{% block content %}
+    <h2>{{ 'blog.signin.form.header'|trans }}</h2>
+    <hr>
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <form action="{{ path('blog.signin') }}" method="post">
+        <div class="form-group">
+            <label for="email">{{ 'blog.signin.form.email'|trans }}</label>
+            <input type="email" id="email" class="form-control" name="_username" value="{{ last_username }}" />
+        </div>
+        <div class="form-group">
+            <label for="password">{{ 'blog.signin.form.password'|trans }}</label>
+            <input type="password" id="password" class="form-control" name="_password" />
+        </div>
+        <button class="btn btn-default" type="submit">{{ 'blog.signin.form.submit'|trans }}</button>
+    </form>
+{% endblock %}
