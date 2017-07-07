@@ -5,7 +5,6 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,16 +16,13 @@ class PostType extends AbstractType
     {
         $builder
             ->add('datetime', DateTimeType::class, [
-                'label' => 'dashboard.post.create.form.datetime'
+                'label' => 'dashboard.post.form.datetime'
             ])
             ->add('title', TextType::class, [
-                'label' => 'dashboard.post.create.form.title'
+                'label' => 'dashboard.post.form.title'
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'dashboard.post.create.form.content'
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'dashboard.post.create.form.submit'
+                'label' => 'dashboard.post.form.content'
             ])
         ;
     }

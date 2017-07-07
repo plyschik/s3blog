@@ -1,7 +1,20 @@
 {% extends ':dashboard:layout.html.twig' %}
 
-{% block header %}{{ 'dashboard.post.list'|trans }}{% endblock %}
-
 {% block content %}
-    Test
+    {% for post in posts %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                {{ post.datetime|date('d-m-Y H:i:s') }} - {{ post.title }}
+            </div>
+            <div class="panel-body">
+                {{ post.content }}
+                <hr>
+                <a class="btn btn-sm btn-primary" href="{{ path('dashboard.posts.edit', { id: post.id }) }}">Edytuj</a>
+                <a class="btn btn-sm btn-danger" href="{{ path('dashboard.posts.delete', { id: post.id }) }}">Usuń</a>
+            </div>
+            <div class="panel-footer">
+                Dodane przez: {{ post.author }}, dnia: {{ post.createdAt|date('d-m-Y H:i:s') }}. Ostatnia aktualizacja: {{ post.updatedAt|date('d-m-Y H:i:s') }}.
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

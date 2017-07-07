@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getPosts()
+    {
+        return $this
+            ->createQueryBuilder('p')
+            ->select('p.id', 'p.datetime', 'p.title', 'p.content', "CONCAT(u.firstName, ' ', u.lastName) AS author", 'p.createdAt', 'p.updatedAt')
+            ->leftJoin('p.user', 'u')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
