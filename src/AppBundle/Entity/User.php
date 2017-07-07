@@ -19,7 +19,7 @@ class User implements UserInterface, \Serializable
      * @var int
      *
      * @ORM\Column(type="integer")
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -91,6 +91,11 @@ class User implements UserInterface, \Serializable
      * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="user")
+     */
+    private $posts;
 
     public function __construct()
     {

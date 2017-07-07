@@ -30,3 +30,22 @@ blog.signup.form.passwordSecond: Powtórz hasło:
 blog.signup.form.submit: Zarejestruj się
 
 blog.flashMessages.signup.success: Twoje konto zostało poprawnie zarejestrowane!
+dashboard.flashMessages.post.create.success: Post został dodany poprawnie!
+dashboard.flashMessages.post.edit.success: Post został poprawnie zaktualizowany!
+dashboard.flashMessages.post.delete.success: Post został poprawnie usunięty!
+
+dashboard.post.list: Zarządzaj postami
+dashboard.post.create: Dodaj nowy post
+dashboard.post.edit: Edytuj post
+
+dashboard.post.form.datetime: Data:
+dashboard.post.form.title: Tytuł:
+dashboard.post.form.content: Treść:
+
+dashboard.post.form.create.submit: Dodaj post
+dashboard.post.form.edit.submit: Aktualizuj post
+
+dashboard.buttons.cancel: Anuluj
+
+dashboard.post.edit.header: Edycja posta
+dashboard.post.create.header: Dodaj nowy post
