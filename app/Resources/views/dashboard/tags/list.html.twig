@@ -1,0 +1,27 @@
+{% extends ':dashboard:layout.html.twig' %}
+
+{% block content %}
+    {% if not tags %}
+        <div class="alert alert-info">{{ 'dashboard.tags.list.lack'|trans }}</div>
+    {% else %}
+        <table class="table table-striped">
+            <tr>
+                <th>{{ 'dashboard.tags.list.id'|trans }}</th>
+                <th>{{ 'dashboard.tags.list.name'|trans }}</th>
+                <th>{{ 'dashboard.tags.list.createdAt'|trans }}</th>
+                <th>{{ 'dashboard.tags.list.management'|trans }}</th>
+            </tr>
+            {% for tag in tags %}
+                <tr>
+                    <td>{{ tag.id }}</td>
+                    <td>{{ tag.name }}</td>
+                    <td>{{ tag.createdAt|date('d-m-Y H:i:s') }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="{{ path('dashboard.tags.edit', { id: tag.id }) }}">{{ 'dashboard.tags.list.edit'|trans }}</a>
+                        <a class="btn btn-sm btn-danger" href="{{ path('dashboard.tags.delete', { id: tag.id }) }}">{{ 'dashboard.tags.list.delete'|trans }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}
