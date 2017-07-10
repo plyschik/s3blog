@@ -1,0 +1,9 @@
+{% extends ':dashboard:layout.html.twig' %}
+
+{% block content %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary" type="submit">{{ 'dashboard.categories.form.edit.submit'|trans }}</button>
+    {{ form_end(form) }}
+{% endblock %}
+

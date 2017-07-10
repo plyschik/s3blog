@@ -79,7 +79,7 @@ class PostController extends Controller
 
             $this->addFlash('success', 'dashboard.flashMessages.post.edit.success');
 
-            return $this->redirectToRoute('dashboard.post.list');
+            return $this->redirectToRoute('dashboard.posts.list');
         }
 
         return $this->render('dashboard/posts/edit.html.twig', [

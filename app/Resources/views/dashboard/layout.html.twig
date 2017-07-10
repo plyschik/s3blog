@@ -59,9 +59,14 @@
                         <div class="panel-heading">
                             {{ 'dashboard.side.categories.header'|trans }}
                         </div>
-                        <div class="panel-body">
-                            ...
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ path('dashboard.categories.list') }}">{{ 'dashboard.categories.list'|trans }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ path('dashboard.categories.create') }}">{{ 'dashboard.categories.create'|trans }}</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">

@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Post;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -23,6 +24,11 @@ class PostType extends AbstractType
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'dashboard.post.form.content'
+            ])
+            ->add('category', EntityType::class, [
+                'class'         => 'AppBundle\Entity\Category',
+                'choice_label'  => 'name',
+                'label'         => 'dashboard.post.form.category'
             ])
         ;
     }

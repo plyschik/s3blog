@@ -1,2 +1,3 @@
 blog.signup.validation.uniqueEntity: Ten adres email jest już zajęty.
 blog.post.validation.uniqueSlug: Ten slug jest już zajęty.
+dashboard.category.uniqueName: Kategoria już istnieje.
