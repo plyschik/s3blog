@@ -49,3 +49,5 @@ dashboard.buttons.cancel: Anuluj
 
 dashboard.post.edit.header: Edycja posta
 dashboard.post.create.header: Dodaj nowy post
+
+dashboard.category.form.name: Nazwa kategorii:
