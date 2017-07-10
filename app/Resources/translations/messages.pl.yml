@@ -68,5 +68,13 @@ dashboard.categories.form.edit.submit: Aktualizuj kategorię
 
 dashboard.tags.uniqueName: Nazwa taga musi być unikalna.
 dashboard.tags.form.name: Nazwa taga:
+dashboard.tags.list.lack: Brak tagów do wyświetlenia.
+dashboard.tags.list.id: ID
+dashboard.tags.list.name: Nazwa
+dashboard.tags.list.createdAt: Data utworzenia
+dashboard.tags.list.management: Zarządzaj
+dashboard.tags.list.edit: Edytuj
+dashboard.tags.list.delete: Usuń
+
 
 dashboard.buttons.cancel: Anuluj
