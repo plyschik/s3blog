@@ -49,7 +49,7 @@ class PostController extends Controller
 
             $this->addFlash('success', 'dashboard.flashMessages.post.create.success');
 
-            return $this->redirectToRoute('dashboard.post.list');
+            return $this->redirectToRoute('dashboard.posts.list');
         }
 
         return $this->render('dashboard/posts/create.html.twig', [
@@ -101,6 +101,6 @@ class PostController extends Controller
 
         $this->addFlash('success', 'dashboard.flashMessages.post.delete.success');
 
-        return $this->redirectToRoute('dashboard.post.list');
+        return $this->redirectToRoute('dashboard.posts.list');
     }
 }
