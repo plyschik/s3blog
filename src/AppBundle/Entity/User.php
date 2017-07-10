@@ -102,6 +102,11 @@ class User implements UserInterface, \Serializable
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Tag", mappedBy="user")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
@@ -399,5 +404,39 @@ class User implements UserInterface, \Serializable
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Add tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     *
+     * @return User
+     */
+    public function addTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tags[] = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Remove tag
+     *
+     * @param \AppBundle\Entity\Tag $tag
+     */
+    public function removeTag(\AppBundle\Entity\Tag $tag)
+    {
+        $this->tags->removeElement($tag);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }

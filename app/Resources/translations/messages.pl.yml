@@ -66,4 +66,6 @@ dashboard.categories.form.name: Nazwa kategorii:
 dashboard.categories.form.create.submit: Dodaj kategorię
 dashboard.categories.form.edit.submit: Aktualizuj kategorię
 
+dashboard.tags.uniqueName: Nazwa taga musi być unikalna.
+
 dashboard.buttons.cancel: Anuluj
