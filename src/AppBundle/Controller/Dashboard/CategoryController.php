@@ -78,4 +78,21 @@ class CategoryController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/dashboard/categories/delete/{id}", name="dashboard.categories.delete")
+     */
+    public function deleteAction(Category $category, EntityManager $entityManager)
+    {
+        if (!$category) {
+            throw $this->createNotFoundException();
+        }
+
+        $entityManager->remove($category);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'dashboard.flashMessages.categories.delete.success');
+
+        return $this->redirectToRoute('dashboard.categories.list');
+    }
 }

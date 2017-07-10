@@ -35,6 +35,7 @@ dashboard.flashMessages.post.edit.success: Post został poprawnie zaktualizowany
 dashboard.flashMessages.post.delete.success: Post został poprawnie usunięty!
 dashboard.flashMessages.categories.create.success: Kategoria została poprawnie dodana!
 dashboard.flashMessages.categories.edit.success: Kategoria została poprawnie zedytowana!
+dashboard.flashMessages.categories.edit.success: Kategoria została usunięta poprawnie!
 
 dashboard.post.list: Zarządzaj postami
 dashboard.post.create: Dodaj nowy post
@@ -58,6 +59,7 @@ dashboard.categories.list.name: Nazwa
 dashboard.categories.list.createdAt: Data utworzenia
 dashboard.categories.list.management: Zarządzaj
 dashboard.categories.list.edit: Edytuj
+dashboard.categories.list.delete: Usuń
 
 dashboard.categories.form.name: Nazwa kategorii:
 dashboard.categories.form.create.submit: Dodaj kategorię

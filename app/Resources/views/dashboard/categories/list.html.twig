@@ -17,7 +17,8 @@
                     <td>{{ category.name }}</td>
                     <td>{{ category.createdAt|date('d-m-Y H:i:s') }}</td>
                     <td>
-                        <a href="{{ path('dashboard.categories.edit', { id: category.id }) }}">{{ 'dashboard.categories.list.edit'|trans }}</a>
+                        <a class="btn btn-sm btn-primary" href="{{ path('dashboard.categories.edit', { id: category.id }) }}">{{ 'dashboard.categories.list.edit'|trans }}</a>
+                        <a class="btn btn-sm btn-danger" href="{{ path('dashboard.categories.delete', { id: category.id }) }}">{{ 'dashboard.categories.list.delete'|trans }}</a>
                     </td>
                 </tr>
             {% endfor %}
