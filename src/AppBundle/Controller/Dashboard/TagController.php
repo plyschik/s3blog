@@ -78,4 +78,21 @@ class TagController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/dashboard/tags/delete/{id}", name="dashboard.tags.delete")
+     */
+    public function deleteAction(Tag $tag, EntityManager $entityManager)
+    {
+        if (!$tag) {
+            throw $this->createNotFoundException();
+        }
+
+        $entityManager->remove($tag);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'dashboard.flashMessages.tags.delete.success');
+
+        return $this->redirectToRoute('dashboard.tags.list');
+    }
 }

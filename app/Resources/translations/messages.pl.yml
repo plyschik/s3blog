@@ -38,6 +38,7 @@ dashboard.flashMessages.categories.edit.success: Kategoria została poprawnie ze
 dashboard.flashMessages.categories.edit.success: Kategoria została usunięta poprawnie!
 dashboard.flashMessages.tags.create.success: Tag został poprawnie utworzony.
 dashboard.flashMessages.tags.edit.success: Tag został poprawnie zedytowany.
+dashboard.flashMessages.tags.delete.success: Tago został poprawnie usunięty.
 
 dashboard.post.list: Zarządzaj postami
 dashboard.post.create: Dodaj nowy post
