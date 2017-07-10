@@ -50,4 +50,32 @@ class TagController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/dashboard/tags/edit/{id}", name="dashboard.tags.edit")
+     */
+    public function editAction(Request $request, Tag $tag, EntityManager $entityManager)
+    {
+        if (!$tag) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createForm(TagType::class, $tag);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $tag->setUpdatedAt(new \DateTime());
+
+            $entityManager->persist($tag);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'dashboard.flashMessages.tags.edit.success');
+
+            return $this->redirectToRoute('dashboard.tags.list');
+        }
+
+        return $this->render('dashboard/tags/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
