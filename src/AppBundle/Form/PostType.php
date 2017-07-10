@@ -30,6 +30,13 @@ class PostType extends AbstractType
                 'choice_label'  => 'name',
                 'label'         => 'dashboard.post.form.category'
             ])
+            ->add('tags', EntityType::class, [
+                'class'         => 'AppBundle\Entity\Tag',
+                'choice_label'  => 'name',
+                'label'         => 'dashboard.post.form.tags',
+                'expanded'      => false,
+                'multiple'      => true
+            ])
         ;
     }
 
