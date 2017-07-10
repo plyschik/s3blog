@@ -72,9 +72,14 @@
                         <div class="panel-heading">
                             {{ 'dashboard.side.tags.header'|trans }}
                         </div>
-                        <div class="panel-body">
-                            ...
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="{{ path('dashboard.tags.list') }}">{{ 'dashboard.tags.list'|trans }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="{{ path('dashboard.tags.create') }}">{{ 'dashboard.tags.create'|trans }}</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-md-8">
