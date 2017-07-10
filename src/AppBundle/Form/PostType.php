@@ -27,7 +27,8 @@ class PostType extends AbstractType
             ])
             ->add('category', EntityType::class, [
                 'class'         => 'AppBundle\Entity\Category',
-                'choice_label'  => 'name'
+                'choice_label'  => 'name',
+                'label'         => 'dashboard.post.form.category'
             ])
         ;
     }

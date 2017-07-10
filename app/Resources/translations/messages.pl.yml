@@ -47,6 +47,7 @@ dashboard.post.edit.header: Edycja posta
 dashboard.post.form.datetime: Data:
 dashboard.post.form.title: Tytuł:
 dashboard.post.form.content: Treść:
+dashboard.post.form.category: Kategoria:
 dashboard.post.form.create.submit: Dodaj post
 dashboard.post.form.edit.submit: Aktualizuj post
 
