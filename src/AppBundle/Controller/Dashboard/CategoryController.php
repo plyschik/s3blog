@@ -50,4 +50,32 @@ class CategoryController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/dashboard/categories/edit/{id}", name="dashboard.categories.edit")
+     */
+    public function editAction(Request $request, Category $category, EntityManager $entityManager)
+    {
+        if (!$category) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category->setUpdatedAt(new \DateTime());
+
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'dashboard.flashMessages.categories.edit.success');
+
+            return $this->redirectToRoute('dashboard.categories.list');
+        }
+
+        return $this->render('dashboard/categories/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }

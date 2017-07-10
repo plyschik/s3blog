@@ -9,12 +9,16 @@
                 <th>{{ 'dashboard.categories.list.id'|trans }}</th>
                 <th>{{ 'dashboard.categories.list.name'|trans }}</th>
                 <th>{{ 'dashboard.categories.list.createdAt'|trans }}</th>
+                <th>{{ 'dashboard.categories.list.management'|trans }}</th>
             </tr>
             {% for category in categories %}
                 <tr>
                     <td>{{ category.id }}</td>
                     <td>{{ category.name }}</td>
                     <td>{{ category.createdAt|date('d-m-Y H:i:s') }}</td>
+                    <td>
+                        <a href="{{ path('dashboard.categories.edit', { id: category.id }) }}">{{ 'dashboard.categories.list.edit'|trans }}</a>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
