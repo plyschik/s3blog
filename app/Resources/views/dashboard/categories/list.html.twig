@@ -1,0 +1,22 @@
+{% extends ':dashboard:layout.html.twig' %}
+
+{% block content %}
+    {% if not categories %}
+        <div class="alert alert-info">{{ 'dashboard.categories.list.lack'|trans }}</div>
+    {% else %}
+        <table class="table table-striped">
+            <tr>
+                <th>{{ 'dashboard.categories.list.id'|trans }}</th>
+                <th>{{ 'dashboard.categories.list.name'|trans }}</th>
+                <th>{{ 'dashboard.categories.list.createdAt'|trans }}</th>
+            </tr>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.createdAt|date('d-m-Y H:i:s') }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endblock %}

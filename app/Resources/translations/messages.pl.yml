@@ -51,3 +51,8 @@ dashboard.post.edit.header: Edycja posta
 dashboard.post.create.header: Dodaj nowy post
 
 dashboard.category.form.name: Nazwa kategorii:
+
+dashboard.categories.list.lack: Brak kategorii do wyświetlenia.
+dashboard.categories.list.id: ID
+dashboard.categories.list.name: Nazwa
+dashboard.categories.list.createdAt: Data utworzenia
