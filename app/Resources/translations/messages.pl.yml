@@ -39,6 +39,9 @@ dashboard.post.list: Zarządzaj postami
 dashboard.post.create: Dodaj nowy post
 dashboard.post.edit: Edytuj post
 
+dashboard.categories.list: Zarządzaj kategoriami
+dashboard.categories.create: Dodaj nową kategorię
+
 dashboard.post.form.datetime: Data:
 dashboard.post.form.title: Tytuł:
 dashboard.post.form.content: Treść:
