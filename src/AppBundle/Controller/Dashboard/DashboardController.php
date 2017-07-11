@@ -8,6 +8,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class DashboardController extends Controller
 {
+    protected $entityManager;
+
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * @Route("/dashboard", name="dashboard.index")
      */
@@ -19,7 +26,14 @@ class DashboardController extends Controller
     public function categoriesPanelAction(EntityManager $entityManager)
     {
         return $this->render('blog/panels/categories.html.twig', [
-            'categories' => $entityManager->getRepository('AppBundle:Category')->getBlogCategories()
+            'categories' => $this->entityManager->getRepository('AppBundle:Category')->getBlogCategories()
+        ]);
+    }
+
+    public function tagsPanelAction()
+    {
+        return $this->render('blog/panels/tags.html.twig', [
+            'tags' => $this->entityManager->getRepository('AppBundle:Tag')->findAll()
         ]);
     }
 }

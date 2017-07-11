@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'blog.side.tags.header'|trans }}</h3>
+    </div>
+    <div class="panel-body">
+        {% for tag in tags %}
+            <span class="label label-default">{{ tag.name }}</span>
+        {% endfor %}
+    </div>
+</div>
