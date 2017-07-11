@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'blog.side.categories.header'|trans }}</h3>
+    </div>
+    <ul class="list-group">
+        {% for category in categories %}
+            <li class="list-group-item">
+                <a href="#">{{ category.name }} ({{ category.amount }})</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

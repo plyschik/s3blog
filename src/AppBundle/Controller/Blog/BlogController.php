@@ -13,6 +13,8 @@ class BlogController extends Controller
      */
     public function indexAction(EntityManager $entityManager)
     {
+        dump($entityManager->getRepository('AppBundle:Category')->getBlogCategories());
+
         return $this->render('blog/index.html.twig', [
             'posts' => $entityManager->getRepository('AppBundle:Post')->getBlogPosts()
         ]);

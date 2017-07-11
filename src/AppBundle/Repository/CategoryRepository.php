@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getBlogCategories()
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT c.id, c.name, COUNT(c.id) AS amount
+            FROM AppBundle:Category c
+            LEFT JOIN AppBundle:Post p WITH p.category = c.id
+            GROUP BY c.id
+            ORDER BY amount DESC
+        ")->getResult();
+    }
 }
