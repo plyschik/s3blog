@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Blog;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -10,8 +11,10 @@ class BlogController extends Controller
     /**
      * @Route("/", name="blog.index")
      */
-    public function indexAction()
+    public function indexAction(EntityManager $entityManager)
     {
-        return $this->render('blog/index.html.twig');
+        return $this->render('blog/index.html.twig', [
+            'posts' => $entityManager->getRepository('AppBundle:Post')->getBlogPosts()
+        ]);
     }
 }

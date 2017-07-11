@@ -1,5 +1,20 @@
 {% extends ':blog:layout.html.twig' %}
 
 {% block content %}
-    {{ parent() }}
+    {% for post in posts %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ post.title }} w kateogrii: {{ post.category.name }}</h3>
+            </div>
+            <div class="panel-body">
+                {{ post.content }}
+            </div>
+            <div class="panel-footer">
+                Dodane przez: {{ post.user.firstName }} {{ post.user.lastName }} dnia: {{ post.datetime|date('d-m-Y H:i:s') }}. Tagi:
+                {% for tag in post.tags %}
+                    <span class="label label-default">{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function listAction()
     {
-        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getPosts();
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getDashboardPosts();
 
         return $this->render('dashboard/posts/list.html.twig', [
             'posts' => $posts
