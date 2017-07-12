@@ -32,4 +32,17 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getPostsWithTag($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p', 't')
+            ->leftJoin('p.tags', 't')
+            ->where('t.id = :id')
+            ->orderBy('p.datetime')
+            ->setParameter(':id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

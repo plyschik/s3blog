@@ -50,6 +50,22 @@ class BlogController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/tag/{id}", name="blog.tag")
+     */
+    public function tagAction($id)
+    {
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getPostsWithTag($id);
+
+        if (!$posts) {
+            return $this->redirectToRoute('blog.index');
+        }
+
+        return $this->render('blog/tag.html.twig', [
+            'posts' => $posts
+        ]);
+    }
+
     public function categoriesPanelAction(EntityManager $entityManager)
     {
         return $this->render('blog/panels/categories.html.twig', [
