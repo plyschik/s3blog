@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Blog;
 
+use AppBundle\Entity\Post;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\Driver\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,6 +17,20 @@ class BlogController extends Controller
     {
         return $this->render('blog/index.html.twig', [
             'posts' => $entityManager->getRepository('AppBundle:Post')->getBlogPosts()
+        ]);
+    }
+
+    /**
+     * @Route("/{id},{slug}.html", name="blog.post")
+     */
+    public function postAction(Post $post)
+    {
+        if (!$post) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('blog/post.html.twig', [
+            'post' => $post
         ]);
     }
 

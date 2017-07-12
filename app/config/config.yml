@@ -62,11 +62,6 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
-        dql:
-            string_functions:
-                MONTH: DoctrineExtensions\Query\Mysql\Month
-                YEAR: DoctrineExtensions\Query\Mysql\Year
-
 doctrine_migrations:
     dir_name: "%kernel.root_dir%/migrations"
     namespace: Migrations

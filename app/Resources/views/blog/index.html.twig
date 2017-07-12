@@ -4,7 +4,9 @@
     {% for post in posts %}
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">{{ post.title }}</h3>
+                <h3 class="panel-title">
+                    <a href="{{ path('blog.post', { slug: post.slug, id: post.id }) }}">{{ post.title }}</a>
+                </h3>
             </div>
             <div class="panel-body">
                 {{ post.content }}
