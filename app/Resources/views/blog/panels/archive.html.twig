@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'blog.side.archive.header'|trans }}</h3>
+    </div>
+    <ul class="list-group">
+        {% for month in months %}
+            <li class="list-group-item">
+                <a href="#">{{ month.month }} {{ month.year }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

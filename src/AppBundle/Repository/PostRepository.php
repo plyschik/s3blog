@@ -18,8 +18,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->leftJoin('p.user', 'u')
             ->orderBy('p.id', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     public function getBlogPosts()
@@ -31,7 +30,6 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->leftJoin('p.tags', 't')
             ->orderBy('p.datetime', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 }

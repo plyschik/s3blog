@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Blog;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\DBAL\Driver\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -13,10 +14,29 @@ class BlogController extends Controller
      */
     public function indexAction(EntityManager $entityManager)
     {
-        dump($entityManager->getRepository('AppBundle:Category')->getBlogCategories());
-
         return $this->render('blog/index.html.twig', [
             'posts' => $entityManager->getRepository('AppBundle:Post')->getBlogPosts()
+        ]);
+    }
+
+    public function categoriesPanelAction(EntityManager $entityManager)
+    {
+        return $this->render('blog/panels/categories.html.twig', [
+            'categories' => $entityManager->getRepository('AppBundle:Category')->getBlogCategories()
+        ]);
+    }
+
+    public function tagsPanelAction(EntityManager $entityManager)
+    {
+        return $this->render('blog/panels/tags.html.twig', [
+            'tags' => $entityManager->getRepository('AppBundle:Tag')->findAll()
+        ]);
+    }
+
+    public function archivePanelAction(Connection $connection)
+    {
+        return $this->render('blog/panels/archive.html.twig', [
+            'months' => $connection->fetchAll("SELECT DISTINCT YEAR(p.datetime) AS year, MONTHNAME(p.datetime) AS month FROM posts p ORDER BY year DESC, month DESC")
         ]);
     }
 }
