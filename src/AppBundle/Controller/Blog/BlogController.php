@@ -34,6 +34,22 @@ class BlogController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/category/{id}", name="blog.category")
+     */
+    public function categoryAction($id)
+    {
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findBy(['category' => $id]);
+
+        if (!$posts) {
+            return $this->redirectToRoute('blog.index');
+        }
+
+        return $this->render('blog/category.html.twig', [
+            'posts' => $posts
+        ]);
+    }
+
     public function categoriesPanelAction(EntityManager $entityManager)
     {
         return $this->render('blog/panels/categories.html.twig', [
