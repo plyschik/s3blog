@@ -45,4 +45,17 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->getResult()
         ;
     }
+
+    public function getPostsByMonth($year, $month)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('YEAR(p.datetime) = :year')
+            ->andWhere('MONTH(p.datetime) = :month')
+            ->orderBy('p.datetime')
+            ->setParameter('year', $year)
+            ->setParameter('month', $month)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

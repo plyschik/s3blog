@@ -5,7 +5,7 @@
     <ul class="list-group">
         {% for month in months %}
             <li class="list-group-item">
-                <a href="#">{{ month.month }} {{ month.year }}</a>
+                <a href="{{ path('blog.archive', { year: month.year, month: month.month }) }}">{{ month.year }} {{ month.month }}</a>
             </li>
         {% endfor %}
     </ul>

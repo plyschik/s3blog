@@ -66,6 +66,22 @@ class BlogController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/archive/{year}/{month}", name="blog.archive")
+     */
+    public function archiveAction($year, $month)
+    {
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getPostsByMonth($year, $month);
+
+        if (!$posts) {
+            return $this->redirectToRoute('blog.index');
+        }
+
+        return $this->render('blog/archive.html.twig', [
+            'posts' => $posts
+        ]);
+    }
+
     public function categoriesPanelAction(EntityManager $entityManager)
     {
         return $this->render('blog/panels/categories.html.twig', [
@@ -83,7 +99,7 @@ class BlogController extends Controller
     public function archivePanelAction(Connection $connection)
     {
         return $this->render('blog/panels/archive.html.twig', [
-            'months' => $connection->fetchAll("SELECT DISTINCT YEAR(p.datetime) AS year, MONTHNAME(p.datetime) AS month FROM posts p ORDER BY year DESC, month DESC")
+            'months' => $connection->fetchAll("SELECT DISTINCT YEAR(p.datetime) AS year, MONTH(p.datetime) AS month, CONCAT(MONTHNAME(p.datetime), ' ', YEAR('p.datetime')) AS monthyear FROM posts p ORDER BY year DESC, month DESC")
         ]);
     }
 }
