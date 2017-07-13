@@ -9,9 +9,9 @@
             {{ post.content }}
         </div>
         <div class="panel-footer">
-            {{ post.user.firstName }} {{ post.user.lastName }} / {{ post.datetime|date('d-m-Y H:i:s') }} / {{ post.category.name }} /
+            {{ post.user.firstName }} {{ post.user.lastName }} / {{ post.datetime|date('d-m-Y H:i') }} / <a href="{{ path('blog.category', { 'id': post.category.id }) }}">{{ post.category.name }}</a> /
             {% for tag in post.tags %}
-                <span class="label label-default">{{ tag.name }}</span>
+                <a href="{{ path('blog.tag', { id: tag.id }) }}"><span class="label label-default">{{ tag.name }}</span></a>
             {% endfor %}
         </div>
     </div>
@@ -21,14 +21,24 @@
         </div>
         {% if not comments %}
             <div class="panel-body">
-                <div class="alert alert-info" style="margin-bottom: 0;">{{ 'blog.post.comments.lack'|trans }}</div>
+                {{ 'blog.post.comments.lack'|trans }}
             </div>
         {% else %}
-            <ul class="list-group">
+            <div class="panel-body">
                 {% for comment in comments %}
-                    <li class="list-group-item">[{{ comment.createdAt|date('d-m-Y H:i:s') }}] {{ comment.user.getFullName }} - {{ comment.comment }}</li>
+                    <blockquote>
+                        <p>
+                            {{ comment.comment }}
+                            {% if is_granted('ROLE_ADMINISTRATOR') %}
+                                <a href="{{ path('blog.comment.delete', { id: comment.id }) }}">
+                                    <span class="close">&times;</span>
+                                </a>
+                            {% endif %}
+                        </p>
+                        <footer>{{ comment.user.getFullName() }}, {{ comment.createdAt|date('d-m-Y H:i:s') }}</footer>
+                    </blockquote>
                 {% endfor %}
-            </ul>
+            </div>
         {% endif %}
         <div class="panel-footer">
             {% if app.user %}
