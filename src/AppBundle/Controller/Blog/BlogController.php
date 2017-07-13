@@ -24,7 +24,7 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/{id},{slug}.html", name="blog.post")
+     * @Route("/{id},{slug}.html", name="blog.post", requirements={"id": "\d+", "slug": "[a-z0-9-]+"})
      * @ParamConverter("post", class="AppBundle:Post", options={"mapping": {"id": "id", "slug": "slug"}})
      *
      * @param Post $post
