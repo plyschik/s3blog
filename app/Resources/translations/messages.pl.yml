@@ -30,6 +30,9 @@ blog.signup.form.passwordFirst: Hasło:
 blog.signup.form.passwordSecond: Powtórz hasło:
 blog.signup.form.submit: Zarejestruj się
 
+blog.comment.form.comment: Treść komentarza:
+blog.comment.form.submit: Dodaj komentarz
+
 blog.flashMessages.signup.success: Twoje konto zostało poprawnie zarejestrowane!
 dashboard.flashMessages.post.create.success: Post został dodany poprawnie!
 dashboard.flashMessages.post.edit.success: Post został poprawnie zaktualizowany!
