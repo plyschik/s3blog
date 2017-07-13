@@ -1,6 +1,7 @@
 blog.navbar.brand: s3blog
 blog.navbar.signin: Zaloguj się
 blog.navbar.signup: Zarejestruj się
+blog.navbar.dashboard: Panel administracyjny
 blog.navbar.signout: Wyloguj się
 
 blog.side.categories.header: Kategorie

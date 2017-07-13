@@ -30,6 +30,7 @@
                             <li><a href="{{ path('blog.signin') }}">{{ 'blog.navbar.signin'|trans }}</a></li>
                             <li><a href="{{ path('blog.signup') }}">{{ 'blog.navbar.signup'|trans }}</a></li>
                         {% else %}
+                            <li><a href="{{ path('dashboard.posts.list') }}">{{ 'blog.navbar.dashboard'|trans }}</a></li>
                             <li><a href="signout">{{ 'blog.navbar.signout'|trans }}</a></li>
                         {% endif %}
                     </ul>
