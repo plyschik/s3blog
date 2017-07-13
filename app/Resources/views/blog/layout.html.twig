@@ -51,17 +51,9 @@
                     {% endblock %}
                 </div>
                 <div class="col-md-4">
-                    {{ render(controller('AppBundle:Blog/Blog:categoriesPanel')) }}
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">{{ 'blog.side.posts.header'|trans }}</h3>
-                        </div>
-                        <div class="panel-body">
-                            ...
-                        </div>
-                    </div>
-                    {{ render(controller('AppBundle:Blog/Blog:tagsPanel')) }}
-                    {{ render(controller('AppBundle:Blog/Blog:archivePanel')) }}
+                    {{ render(controller('AppBundle:Blog/Panel:categoriesPanel')) }}
+                    {{ render(controller('AppBundle:Blog/Panel:tagsPanel')) }}
+                    {{ render(controller('AppBundle:Blog/Panel:archivePanel')) }}
                 </div>
             </div>
         </div>
