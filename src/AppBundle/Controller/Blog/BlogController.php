@@ -6,6 +6,7 @@ use AppBundle\Entity\Comment;
 use AppBundle\Entity\Post;
 use AppBundle\Form\CommentType;
 use Doctrine\ORM\EntityManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,12 @@ class BlogController extends Controller
 
     /**
      * @Route("/{id},{slug}.html", name="blog.post")
+     * @ParamConverter("post", class="AppBundle:Post", options={"mapping": {"id": "id", "slug": "slug"}})
+     *
+     * @param Post $post
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function postAction(Post $post, Request $request)
     {
@@ -31,34 +38,34 @@ class BlogController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $comment = new Comment();
+        $parameters['post'] = $post;
 
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $form = $this->createForm(CommentType::class, $comment = new Comment());
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setUser($this->getUser());
-            $comment->setPost($post);
-            $comment->setCreatedAt(new \DateTime());
-            $comment->setUpdatedAt(new \DateTime());
+            $parameters['form'] = $form->createView();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($comment);
-            $em->flush();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $comment->setUser($this->getUser());
+                $comment->setPost($post);
+                $comment->setCreatedAt(new \DateTime());
+                $comment->setUpdatedAt(new \DateTime());
 
-            return $this->redirectToRoute('blog.post', [
-                'id'    => $post->getId(),
-                'slug'  => $post->getSlug()
-            ]);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($comment);
+                $em->flush();
+
+                return $this->redirectToRoute('blog.post', [
+                    'id' => $post->getId(),
+                    'slug' => $post->getSlug()
+                ]);
+            }
         }
 
-        $comments = $this->getDoctrine()->getRepository('AppBundle:Comment')->getPostComments($post->getId());
+        $parameters['comments'] = $this->getDoctrine()->getRepository('AppBundle:Comment')->getPostComments($post->getId());
 
-        return $this->render('blog/post.html.twig', [
-            'post'      => $post,
-            'comments'  => $comments,
-            'form'      => $form->createView()
-        ]);
+        return $this->render('blog/post.html.twig', $parameters);
     }
 
     /**
