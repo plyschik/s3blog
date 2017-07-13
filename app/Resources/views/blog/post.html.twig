@@ -31,10 +31,14 @@
             </ul>
         {% endif %}
         <div class="panel-footer">
-            {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <button class="btn btn-primary" type="submit">{{ 'blog.comment.form.submit'|trans }}</button>
-            {{ form_end(form) }}
+            {% if app.user %}
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <button class="btn btn-primary" type="submit">{{ 'blog.comment.form.submit'|trans }}</button>
+                {{ form_end(form) }}
+            {% else %}
+                <div class="alert alert-success" style="margin-bottom: 0;">{{ 'blog.post.comments.shouldSignin'|trans({ '%url%': path('blog.signin') })|raw }}</div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

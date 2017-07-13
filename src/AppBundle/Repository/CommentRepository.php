@@ -16,6 +16,7 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
             ->addSelect('u')
             ->innerJoin('c.user', 'u')
             ->where('c.post = :postId')
+            ->orderBy('c.createdAt', 'DESC')
             ->setParameter('postId', $postId)
             ->getQuery()
         ;
