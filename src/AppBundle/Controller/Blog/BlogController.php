@@ -6,6 +6,7 @@ use AppBundle\Entity\Comment;
 use AppBundle\Entity\Post;
 use AppBundle\Form\CommentType;
 use Doctrine\ORM\EntityManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,15 +25,17 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/{id},{slug}.html", name="blog.post", requirements={"id": "\d+", "slug": "[a-z0-9-]+"})
+     * @Route("/{id},{slug}.html", name="blog.post", requirements={"id": "\d+", "slug": "^[a-z0-9-]+$"})
+     * @Method({"GET", "POST"})
      * @ParamConverter("post", class="AppBundle:Post", options={"mapping": {"id": "id", "slug": "slug"}})
      *
-     * @param Post $post
      * @param Request $request
+     * @param Post $post
+     * @param EntityManager $em
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function postAction(Post $post, Request $request)
+    public function postAction(Request $request, Post $post, EntityManager $em)
     {
         if (!$post) {
             throw $this->createNotFoundException();
@@ -49,21 +52,20 @@ class BlogController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
                 $comment->setUser($this->getUser());
                 $comment->setPost($post);
-                $comment->setCreatedAt(new \DateTime());
-                $comment->setUpdatedAt(new \DateTime());
+                $comment->setCreatedAt(new \DateTime('now'));
+                $comment->setUpdatedAt(new \DateTime('now'));
 
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($comment);
                 $em->flush();
 
                 return $this->redirectToRoute('blog.post', [
-                    'id' => $post->getId(),
-                    'slug' => $post->getSlug()
+                    'id'    => $post->getId(),
+                    'slug'  => $post->getSlug()
                 ]);
             }
         }
 
-        $parameters['comments'] = $this->getDoctrine()->getRepository('AppBundle:Comment')->getPostComments($post->getId());
+        $parameters['comments'] = $em->getRepository('AppBundle:Comment')->getPostComments($post->getId());
 
         return $this->render('blog/post.html.twig', $parameters);
     }
