@@ -97,6 +97,19 @@ class Post
     private $tags;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+     */
+    private $comments;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -297,13 +310,6 @@ class Post
     {
         return $this->category;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add tag
@@ -337,5 +343,39 @@ class Post
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return Post
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
