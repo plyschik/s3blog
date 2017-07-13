@@ -169,6 +169,11 @@ class User implements UserInterface, \Serializable
         return $this->plainPassword;
     }
 
+    public function getFullName()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+
     /**
      * Get id
      *

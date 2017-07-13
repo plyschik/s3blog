@@ -15,5 +15,27 @@
             {% endfor %}
         </div>
     </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Komentarze</h3>
+        </div>
+        {% if not comments %}
+            <div class="panel-body">
+                <div class="alert alert-info" style="margin-bottom: 0;">{{ 'blog.post.comments.lack'|trans }}</div>
+            </div>
+        {% else %}
+            <ul class="list-group">
+                {% for comment in comments %}
+                    <li class="list-group-item">[{{ comment.createdAt|date('d-m-Y H:i:s') }}] {{ comment.user.getFullName }} - {{ comment.comment }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="panel-footer">
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+                <button class="btn btn-primary" type="submit">{{ 'blog.comment.form.submit'|trans }}</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
 

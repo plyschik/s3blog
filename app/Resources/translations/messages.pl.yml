@@ -32,6 +32,7 @@ blog.signup.form.submit: Zarejestruj się
 
 blog.comment.form.comment: Treść komentarza:
 blog.comment.form.submit: Dodaj komentarz
+blog.post.comments.lack: Brak komentarzy.
 
 blog.flashMessages.signup.success: Twoje konto zostało poprawnie zarejestrowane!
 dashboard.flashMessages.post.create.success: Post został dodany poprawnie!

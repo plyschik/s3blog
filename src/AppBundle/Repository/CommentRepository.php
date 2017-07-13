@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getPostComments($postId)
+    {
+        $query = $this->createQueryBuilder('c')
+            ->addSelect('u')
+            ->innerJoin('c.user', 'u')
+            ->where('c.post = :postId')
+            ->setParameter('postId', $postId)
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
 }

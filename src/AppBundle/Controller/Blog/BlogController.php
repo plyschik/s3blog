@@ -2,10 +2,13 @@
 
 namespace AppBundle\Controller\Blog;
 
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Post;
+use AppBundle\Form\CommentType;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class BlogController extends Controller
 {
@@ -22,14 +25,39 @@ class BlogController extends Controller
     /**
      * @Route("/{id},{slug}.html", name="blog.post")
      */
-    public function postAction(Post $post)
+    public function postAction(Post $post, Request $request)
     {
         if (!$post) {
             throw $this->createNotFoundException();
         }
 
+        $comment = new Comment();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setUser($this->getUser());
+            $comment->setPost($post);
+            $comment->setCreatedAt(new \DateTime());
+            $comment->setUpdatedAt(new \DateTime());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+
+            return $this->redirectToRoute('blog.post', [
+                'id'    => $post->getId(),
+                'slug'  => $post->getSlug()
+            ]);
+        }
+
+        $comments = $this->getDoctrine()->getRepository('AppBundle:Comment')->getPostComments($post->getId());
+
         return $this->render('blog/post.html.twig', [
-            'post' => $post
+            'post'      => $post,
+            'comments'  => $comments,
+            'form'      => $form->createView()
         ]);
     }
 
