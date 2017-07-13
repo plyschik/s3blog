@@ -5,14 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Table(name="categories")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CategoryRepository")
- * @UniqueEntity(fields={"name"}, message="dashboard.category.uniqueName")
+ * @ORM\Table(name="comments")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
  */
-class Category
+class Comment
 {
     /**
      * @var int
@@ -24,44 +22,45 @@ class Category
     private $id;
 
     /**
-     * @ORM\manyToOne(targetEntity="User", inversedBy="categories")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=32, unique=true)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Length(min=4, max=32)
+     * @ORM\ManyToOne(targetEntity="Post", inversedBy="comments")
+     * @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      */
-    private $name;
+    private $post;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     min=4,
+     *     max=65535
+     * )
+     */
+    private $comment;
+
+    /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
     private $createdAt;
 
     /**
+     * @var \DateTime
+     *
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="update")
      */
     private $updatedAt;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Post", mappedBy="category")
-     */
-    private $posts;
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -74,27 +73,27 @@ class Category
     }
 
     /**
-     * Set name
+     * Set comment
      *
-     * @param string $name
+     * @param string $comment
      *
-     * @return Category
+     * @return Comment
      */
-    public function setName($name)
+    public function setComment($comment)
     {
-        $this->name = $name;
+        $this->comment = $comment;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get comment
      *
      * @return string
      */
-    public function getName()
+    public function getComment()
     {
-        return $this->name;
+        return $this->comment;
     }
 
     /**
@@ -102,7 +101,7 @@ class Category
      *
      * @param \DateTime $createdAt
      *
-     * @return Category
+     * @return Comment
      */
     public function setCreatedAt($createdAt)
     {
@@ -126,7 +125,7 @@ class Category
      *
      * @param \DateTime $updatedAt
      *
-     * @return Category
+     * @return Comment
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -150,7 +149,7 @@ class Category
      *
      * @param \AppBundle\Entity\User $user
      *
-     * @return Category
+     * @return Comment
      */
     public function setUser(\AppBundle\Entity\User $user = null)
     {
@@ -170,36 +169,26 @@ class Category
     }
 
     /**
-     * Add post
+     * Set post
      *
      * @param \AppBundle\Entity\Post $post
      *
-     * @return Category
+     * @return Comment
      */
-    public function addPost(\AppBundle\Entity\Post $post)
+    public function setPost(\AppBundle\Entity\Post $post = null)
     {
-        $this->posts[] = $post;
+        $this->post = $post;
 
         return $this;
     }
 
     /**
-     * Remove post
+     * Get post
      *
-     * @param \AppBundle\Entity\Post $post
+     * @return \AppBundle\Entity\Post
      */
-    public function removePost(\AppBundle\Entity\Post $post)
+    public function getPost()
     {
-        $this->posts->removeElement($post);
-    }
-
-    /**
-     * Get posts
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPosts()
-    {
-        return $this->posts;
+        return $this->post;
     }
 }
