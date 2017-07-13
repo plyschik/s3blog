@@ -174,6 +174,11 @@ class User implements UserInterface, \Serializable
         return $this->firstName . ' ' . $this->lastName;
     }
 
+    public function getAvatarUrl()
+    {
+        return 'https://www.gravatar.com/avatar/' . md5($this->email);
+    }
+
     /**
      * Get id
      *
