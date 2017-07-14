@@ -9,7 +9,7 @@
             {{ post.content }}
         </div>
         <div class="panel-footer">
-            {{ post.user.firstName }} {{ post.user.lastName }} / {{ post.datetime|date('d-m-Y H:i') }} / <a href="{{ path('blog.category', { 'id': post.category.id }) }}">{{ post.category.name }}</a> /
+            {{ post.user.getFullName() }} / {{ post.datetime|date('d-m-Y H:i') }} / <a href="{{ path('blog.category', { 'id': post.category.id }) }}">{{ post.category.name }}</a> /
             {% for tag in post.tags %}
                 <a href="{{ path('blog.tag', { id: tag.id }) }}"><span class="label label-default">{{ tag.name }}</span></a>
             {% endfor %}
