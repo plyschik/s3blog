@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class TagRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getBlogTags()
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT t.slug, t.name, COUNT(p) AS amount
+            FROM AppBundle:Tag t
+            JOIN t.posts p
+            GROUP BY t.id
+            ORDER BY amount DESC
+        ")->getResult();
+    }
 }

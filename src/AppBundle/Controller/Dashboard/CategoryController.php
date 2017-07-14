@@ -35,6 +35,7 @@ class CategoryController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $category->setUser($this->getUser());
+            $category->setSlug($this->get('slugger')->getSlug($category->getName()));
             $category->setCreatedAt(new \DateTime());
             $category->setUpdatedAt(new \DateTime());
 
@@ -64,6 +65,7 @@ class CategoryController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $category->setSlug($this->get('slugger')->getSlug($category->getName()));
             $category->setUpdatedAt(new \DateTime());
 
             $entityManager->persist($category);

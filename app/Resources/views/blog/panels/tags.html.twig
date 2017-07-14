@@ -4,9 +4,7 @@
     </div>
     <div class="panel-body">
         {% for tag in tags %}
-            <a href="{{ path('blog.tag', { id: tag.id }) }}">
-                <span class="label label-default">{{ tag.name }}</span>
-            </a>
+            <a href="{{ path('blog.tag', { slug: tag.slug }) }}"><span class="label label-default">{{ tag.name }} ({{ tag.amount }})</span></a>
         {% endfor %}
     </div>
 </div>

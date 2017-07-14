@@ -71,27 +71,27 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/category/{id}", name="blog.category")
+     * @Route("/category/{slug}", name="blog.category")
      */
-    public function categoryAction($id)
+    public function categoryAction($slug)
     {
-        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->findBy(['category' => $id]);
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getPostsWithCategory($slug);
 
         if (!$posts) {
             return $this->redirectToRoute('blog.index');
         }
-
+        
         return $this->render('blog/category.html.twig', [
             'posts' => $posts
         ]);
     }
 
     /**
-     * @Route("/tag/{id}", name="blog.tag")
+     * @Route("/tag/{slug}", name="blog.tag")
      */
-    public function tagAction($id)
+    public function tagAction($slug)
     {
-        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getPostsWithTag($id);
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getPostsWithTag($slug);
 
         if (!$posts) {
             return $this->redirectToRoute('blog.index');

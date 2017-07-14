@@ -19,14 +19,14 @@ class PanelController extends Controller
     public function tagsPanelAction(EntityManager $entityManager)
     {
         return $this->render('blog/panels/tags.html.twig', [
-            'tags' => $entityManager->getRepository('AppBundle:Tag')->findAll()
+            'tags' => $entityManager->getRepository('AppBundle:Tag')->getBlogTags()
         ]);
     }
 
-    public function archivePanelAction(Connection $connection)
+    public function archivePanelAction(EntityManager $entityManager)
     {
         return $this->render('blog/panels/archive.html.twig', [
-            'months' => $connection->fetchAll("SELECT DISTINCT YEAR(p.datetime) AS year, MONTH(p.datetime) AS month, CONCAT(MONTHNAME(p.datetime), ' ', YEAR('p.datetime')) AS monthyear FROM posts p ORDER BY year DESC, month DESC")
+            'months' => $entityManager->getRepository('AppBundle:Post')->getArchive()
         ]);
     }
 }

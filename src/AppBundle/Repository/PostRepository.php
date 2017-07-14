@@ -33,14 +33,27 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-    public function getPostsWithTag($id)
+    public function getPostsWithCategory($slug)
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p', 'c')
+            ->leftJoin('p.category', 'c')
+            ->where('c.slug = :slug')
+            ->orderBy('p.datetime')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getPostsWithTag($slug)
     {
         return $this->createQueryBuilder('p')
             ->select('p', 't')
             ->leftJoin('p.tags', 't')
-            ->where('t.id = :id')
+            ->where('t.slug = :slug')
             ->orderBy('p.datetime')
-            ->setParameter(':id', $id)
+            ->setParameter('slug', $slug)
             ->getQuery()
             ->getResult()
         ;
@@ -57,5 +70,14 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    public function getArchive()
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT DISTINCT YEAR(p.datetime) AS year, MONTH(p.datetime) AS month
+            FROM AppBundle:Post p
+            ORDER BY year DESC, month DESC
+        ")->getResult();
     }
 }

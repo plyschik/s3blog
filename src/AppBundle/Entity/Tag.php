@@ -32,6 +32,13 @@ class Tag
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=64)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=32, unique=true)
      *
      * @Assert\NotBlank()
@@ -71,6 +78,30 @@ class Tag
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Tag
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**

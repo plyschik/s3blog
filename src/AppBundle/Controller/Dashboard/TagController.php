@@ -35,6 +35,7 @@ class TagController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $tag->setUser($this->getUser());
+            $tag->setSlug($this->get('slugger')->getSlug($tag->getName()));
             $tag->setCreatedAt(new \DateTime());
             $tag->setUpdatedAt(new \DateTime());
 
@@ -64,6 +65,7 @@ class TagController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $tag->setSlug($this->get('slugger')->getSlug($tag->getName()));
             $tag->setUpdatedAt(new \DateTime());
 
             $entityManager->persist($tag);

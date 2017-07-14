@@ -17,7 +17,8 @@ class PostType extends AbstractType
     {
         $builder
             ->add('datetime', DateTimeType::class, [
-                'label' => 'dashboard.post.form.datetime'
+                'label' => 'dashboard.post.form.datetime',
+                'data'  => new \DateTime('now')
             ])
             ->add('title', TextType::class, [
                 'label' => 'dashboard.post.form.title'

@@ -12,12 +12,15 @@ class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getBlogCategories()
     {
-        return $this->getEntityManager()->createQuery("
-            SELECT c.id, c.name, COUNT(c.id) AS amount
-            FROM AppBundle:Category c
-            LEFT JOIN AppBundle:Post p WITH p.category = c.id
-            GROUP BY c.id
-            ORDER BY amount DESC
-        ")->getResult();
+        return $this
+            ->getEntityManager()
+            ->createQuery("
+                SELECT c.slug, c.name, (SELECT COUNT(p.id) FROM AppBundle:Post p WHERE p.category = c.id) AS amount
+                FROM AppBundle:Category c
+                HAVING amount > 0  
+                ORDER BY amount DESC
+            ")
+            ->setMaxResults(5)
+            ->getResult();
     }
 }
