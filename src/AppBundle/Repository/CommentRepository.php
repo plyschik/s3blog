@@ -12,15 +12,12 @@ class CommentRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getPostComments($postId)
     {
-        $query = $this->createQueryBuilder('c')
-            ->addSelect('u')
-            ->innerJoin('c.user', 'u')
-            ->where('c.post = :postId')
-            ->orderBy('c.createdAt', 'DESC')
-            ->setParameter('postId', $postId)
-            ->getQuery()
-        ;
-
-        return $query->getResult();
+        return $this->getEntityManager()->createQuery("
+            SELECT c, u
+            FROM AppBundle:Comment c
+            LEFT JOIN c.user u
+            WHERE c.post = :postId
+            ORDER BY c.createdAt DESC
+        ")->setParameter('postId', $postId)->getResult();
     }
 }

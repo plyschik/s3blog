@@ -10,66 +10,57 @@ namespace AppBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getDashboardPosts()
-    {
-        return $this
-            ->createQueryBuilder('p')
-            ->select('p.id', 'p.datetime', 'p.title', 'p.content', "CONCAT(u.firstName, ' ', u.lastName) AS author", 'p.createdAt', 'p.updatedAt')
-            ->leftJoin('p.user', 'u')
-            ->orderBy('p.id', 'DESC')
-            ->getQuery()
-            ->getResult();
-    }
-
     public function getBlogPosts()
     {
-        return $this->createQueryBuilder('p')
-            ->select('p', 'u', 'c', 't')
-            ->leftJoin('p.user', 'u')
-            ->leftJoin('p.category', 'c')
-            ->leftJoin('p.tags', 't')
-            ->orderBy('p.datetime', 'DESC')
-            ->getQuery()
-            ->getResult();
+        return $this->getEntityManager()->createQuery("
+            SELECT p, u, c, t
+            FROM AppBundle:Post p
+            LEFT JOIN p.user u
+            LEFT JOIN p.category c
+            LEFT JOIN p.tags t
+            ORDER BY p.datetime DESC
+        ")->getResult();
     }
 
     public function getPostsWithCategory($slug)
     {
-        return $this->createQueryBuilder('p')
-            ->select('p', 'c')
-            ->leftJoin('p.category', 'c')
-            ->where('c.slug = :slug')
-            ->orderBy('p.datetime')
-            ->setParameter('slug', $slug)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->getEntityManager()->createQuery("
+            SELECT p, u, c, t
+            FROM AppBundle:Post p
+            LEFT JOIN p.user u
+            LEFT JOIN p.category c
+            LEFT JOIN p.tags t
+            WHERE c.slug = :slug
+            ORDER BY p.datetime DESC
+        ")->setParameter('slug', $slug)->getResult();
     }
 
     public function getPostsWithTag($slug)
     {
-        return $this->createQueryBuilder('p')
-            ->select('p', 't')
-            ->leftJoin('p.tags', 't')
-            ->where('t.slug = :slug')
-            ->orderBy('p.datetime')
-            ->setParameter('slug', $slug)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->getEntityManager()->createQuery("
+            SELECT p
+            FROM AppBundle:Post p
+            LEFT JOIN p.user u
+            LEFT JOIN p.category c
+            LEFT JOIN p.tags t
+            WHERE t.slug = :slug
+        ")->setParameter('slug', $slug)->getResult();
     }
 
-    public function getPostsByMonth($year, $month)
+    public function getPostsByDate($year, $month)
     {
-        return $this->createQueryBuilder('p')
-            ->where('YEAR(p.datetime) = :year')
-            ->andWhere('MONTH(p.datetime) = :month')
-            ->orderBy('p.datetime')
-            ->setParameter('year', $year)
-            ->setParameter('month', $month)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->getEntityManager()->createQuery("
+            SELECT p, u, c, t
+            FROM AppBundle:Post p
+            LEFT JOIN p.user u
+            LEFT JOIN p.category c
+            LEFT JOIN p.tags t
+            WHERE YEAR(p.datetime) = :year AND MONTH(p.datetime) = :month
+            ORDER BY p.datetime DESC
+        ")->setParameters([
+            'year'  => $year,
+            'month' => $month
+        ])->getResult();
     }
 
     public function getArchive()
@@ -78,6 +69,16 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
             SELECT DISTINCT YEAR(p.datetime) AS year, MONTH(p.datetime) AS month
             FROM AppBundle:Post p
             ORDER BY year DESC, month DESC
+        ")->getResult();
+    }
+
+    public function getDashboardPosts()
+    {
+        return $this->getEntityManager()->createQuery("
+            SELECT p, u
+            FROM AppBundle:Post p
+            LEFT JOIN p.user u
+            ORDER BY p.datetime DESC
         ")->getResult();
     }
 }

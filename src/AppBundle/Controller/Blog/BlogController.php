@@ -80,7 +80,7 @@ class BlogController extends Controller
         if (!$posts) {
             return $this->redirectToRoute('blog.index');
         }
-        
+
         return $this->render('blog/category.html.twig', [
             'posts' => $posts
         ]);
@@ -107,7 +107,7 @@ class BlogController extends Controller
      */
     public function archiveAction($year, $month)
     {
-        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getPostsByMonth($year, $month);
+        $posts = $this->getDoctrine()->getRepository('AppBundle:Post')->getPostsByDate($year, $month);
 
         if (!$posts) {
             return $this->redirectToRoute('blog.index');
